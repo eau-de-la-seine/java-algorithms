@@ -60,22 +60,24 @@ public class Combination {
 	}
 
 	private static class ColumnIndex {
-		private final int length;
+		private final int maxIndex;
+		private final int maxCounter;
 		private int counter;
 		private int currentIndex;
 
-		public ColumnIndex(int length) {
-			this.length = length;
+		public ColumnIndex(int maxIndex, int maxCounter) {
+			this.maxIndex = maxIndex;
+			this.maxCounter = maxCounter;
 			counter = 0;
 			currentIndex = 0;
 		}
 
 		public int getIndex() {
 			// Re-init currentIndex
-			if (counter == length) {
+			if (counter == maxCounter) {
 				counter = 0;
 				currentIndex++;
-				if (currentIndex > length) {
+				if (currentIndex == maxIndex) {
 					currentIndex = 0;
 				}
 			}
@@ -100,7 +102,7 @@ public class Combination {
 
 			// Initializing "i" for starting from the last index
 			for (int i = columnIndexes.length - 1; i >= 0; i--) {
-				columnIndexes[i] = new ColumnIndex(nbCombinations);
+				columnIndexes[i] = new ColumnIndex(series[i].size(), nbCombinations);
 
 				// Prepare next "nbCombinations"
 				nbCombinations *= series[i].size();

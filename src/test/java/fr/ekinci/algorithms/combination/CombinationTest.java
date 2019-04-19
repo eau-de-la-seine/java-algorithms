@@ -66,6 +66,21 @@ public class CombinationTest {
 	}
 
 	@Test
+	public void generate_nominal_without_duplicated_2() {
+		// GIVEN
+		Set<Integer>[] series = inputSeries2();
+
+		// WHEN
+		int[][] actual = Combination.builder()
+				.duplicatedElements(false)
+				.build()
+				.generate(series);
+
+		// THEN
+		Assert.assertEquals(20, actual.length);
+	}
+
+	@Test
 	public void generate_nominal_without_duplicated() {
 		// GIVEN
 		Set<Integer>[] series = inputSeries();
@@ -134,6 +149,29 @@ public class CombinationTest {
 		Set<Integer> set3 = new HashSet<Integer>(){{
 			add(3);
 			add(7);
+		}};
+
+		return (Set<Integer>[]) new Set<?>[]{set1, set2, set3};
+	}
+
+	private Set<Integer>[] inputSeries2() {
+		Set<Integer> set1 = new HashSet<Integer>(){{
+			add(2);
+			add(5);
+			add(3);
+		}};
+
+		Set<Integer> set2 = new HashSet<Integer>(){{
+			add(10);
+			add(2);
+		}};
+
+		Set<Integer> set3 = new HashSet<Integer>(){{
+			add(5);
+			add(8);
+			add(11);
+			add(7);
+			add(10);
 		}};
 
 		return (Set<Integer>[]) new Set<?>[]{set1, set2, set3};
